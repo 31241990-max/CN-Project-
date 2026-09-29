@@ -1,0 +1,11 @@
+{
+  "num_nodes": 447,
+  "edge_feature_dim": 12,
+  "window_size": 128,
+  "stride": 128,
+  "decision_threshold": 0.35324588418006897,
+  "label_mapping": {
+    "0": "Benign",
+    "1": "Attack"
+  }
+}
