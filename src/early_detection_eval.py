@@ -117,10 +117,9 @@ def plot_tradeoff(results, out_dir="outputs"):
     plt.xticks(x)
     plt.grid(True)
     plt.legend()
-    plt.tight_layout()
-    out_path = Path(out_dir) / "early_detection_curve.png"
+    out_path = Path(out_dir).resolve() / "early_detection_curve.png"
     out_path.parent.mkdir(exist_ok=True, parents=True)
-    plt.savefig(out_path)
+    plt.savefig(str(out_path))
     plt.close()
     print(f"Saved plot to {out_path}")
 

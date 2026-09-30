@@ -1,20 +1,20 @@
 {
-  "threshold": 0.6454696655273438,
-  "accuracy": 0.20669450431034483,
-  "precision": 0.20361592632719394,
-  "recall": 0.9940495867768595,
-  "f1": 0.3379980891361771,
-  "roc_auc": 0.4948549787044862,
-  "pr_auc": 0.20316437549671792,
+  "threshold": 0.785621702671051,
+  "accuracy": 0.994207974137931,
+  "precision": 0.9922948073701843,
+  "recall": 0.9791735537190083,
+  "f1": 0.9856905158069883,
+  "roc_auc": 0.9995216216046184,
+  "pr_auc": 0.9984591060012953,
   "confusion_matrix": [
     [
-      62,
-      11761
+      11800,
+      23
     ],
     [
-      18,
-      3007
+      63,
+      2962
     ]
   ],
-  "classification_report": "              precision    recall  f1-score   support\n\n      Benign     0.7750    0.0052    0.0104     11823\n      Attack     0.2036    0.9940    0.3380      3025\n\n    accuracy                         0.2067     14848\n   macro avg     0.4893    0.4996    0.1742     14848\nweighted avg     0.6586    0.2067    0.0772     14848\n"
+  "classification_report": "              precision    recall  f1-score   support\n\n      Benign     0.9947    0.9981    0.9964     11823\n      Attack     0.9923    0.9792    0.9857      3025\n\n    accuracy                         0.9942     14848\n   macro avg     0.9935    0.9886    0.9910     14848\nweighted avg     0.9942    0.9942    0.9942     14848\n"
 }

@@ -35,10 +35,10 @@ def epoch(model,windows,optimizer,criterion,device,training,threshold=0.5,clip=1
     model.train(training); losses=[]; ys=[]; logits_all=[]
     if training: optimizer.zero_grad(set_to_none=True)
     for i,w in enumerate(windows):
-        x=torch.from_numpy(w.node_features).to(device)
-        ei=torch.from_numpy(w.edge_index).long().to(device)
-        ef=torch.from_numpy(w.edge_features).to(device)
-        y=torch.from_numpy(w.labels).long().to(device)
+        x=torch.from_numpy(np.ascontiguousarray(w.node_features)).to(device)
+        ei=torch.from_numpy(np.ascontiguousarray(w.edge_index)).long().to(device)
+        ef=torch.from_numpy(np.ascontiguousarray(w.edge_features)).to(device)
+        y=torch.from_numpy(np.ascontiguousarray(w.labels)).long().to(device)
         with torch.set_grad_enabled(training):
             logits=model(x,ei,ef); loss=criterion(logits,y)
             if training:
