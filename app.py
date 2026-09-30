@@ -21,158 +21,158 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# High-Tech Cyber Command Center CSS
-CYBER_CSS = """
+# Professional Light Mode Design System (Clean, Minimal, Mobile-First)
+LIGHT_THEME_CSS = """
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
 
 :root {
-    --bg-base: #060913;
-    --card-surface: rgba(15, 23, 42, 0.72);
-    --card-border: rgba(56, 189, 248, 0.18);
-    --cyan-glow: #06b6d4;
-    --blue-neon: #38bdf8;
-    --red-alert: #f43f5e;
-    --emerald-safe: #10b981;
-    --amber-warn: #f59e0b;
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --bg-main: #f8fafc;
+    --card-surface: #ffffff;
+    --border-subtle: #e2e8f0;
+    --border-focus: #93c5fd;
+    --primary-blue: #2563eb;
+    --primary-indigo: #4f46e5;
+    --safe-emerald: #059669;
+    --warn-amber: #d97706;
+    --alert-crimson: #e11d48;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
 }
 
-/* Global App Styling */
+/* Global App Container */
 .stApp {
-    background: radial-gradient(circle at 50% -10%, #0f1d3a 0%, #070b16 55%, #04060d 100%) !important;
+    background: #f8fafc !important;
     font-family: 'Inter', -apple-system, sans-serif !important;
     color: var(--text-primary) !important;
 }
 
-/* Compact Headings */
+/* Typography Hierarchy */
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
     letter-spacing: -0.02em !important;
-    color: #f1f5f9 !important;
 }
 
-/* Glassmorphic Metric Cards */
+/* Compact Glass-White Metric Cards */
 div[data-testid="stMetric"] {
-    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.45) 100%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    border-top: 1px solid rgba(56, 189, 248, 0.3) !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
     border-radius: 12px !important;
-    padding: 14px 18px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
-    backdrop-filter: blur(12px) !important;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+    padding: 12px 16px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
 }
 div[data-testid="stMetric"]:hover {
-    border-color: rgba(56, 189, 248, 0.5) !important;
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.18) !important;
+    border-color: #93c5fd !important;
+    box-shadow: 0 4px 18px rgba(37, 99, 235, 0.08) !important;
     transform: translateY(-2px) !important;
 }
 div[data-testid="stMetricLabel"] {
     font-family: 'Outfit', sans-serif !important;
-    font-size: 0.78rem !important;
+    font-size: 0.72rem !important;
     font-weight: 600 !important;
     text-transform: uppercase !important;
-    letter-spacing: 0.06em !important;
-    color: #94a3b8 !important;
+    letter-spacing: 0.05em !important;
+    color: #64748b !important;
 }
 div[data-testid="stMetricValue"] {
     font-family: 'JetBrains Mono', monospace !important;
-    font-size: 1.65rem !important;
+    font-size: 1.55rem !important;
     font-weight: 700 !important;
-    color: #f8fafc !important;
+    color: #0f172a !important;
 }
 
-/* Sidebar Aesthetics */
+/* Clean White Sidebar */
 section[data-testid="stSidebar"] {
-    background: linear-gradient(180deg, rgba(9, 14, 28, 0.96) 0%, rgba(5, 8, 16, 0.98) 100%) !important;
-    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
-    backdrop-filter: blur(16px) !important;
+    background: #ffffff !important;
+    border-right: 1px solid #e2e8f0 !important;
 }
 
-/* Tab Navigation Styling */
+/* Modern Tab Navigation */
 button[data-baseweb="tab"] {
     font-family: 'Outfit', sans-serif !important;
     font-weight: 600 !important;
     font-size: 0.92rem !important;
     border-radius: 8px 8px 0 0 !important;
-    padding: 10px 22px !important;
-    color: #94a3b8 !important;
+    padding: 10px 20px !important;
+    color: #64748b !important;
     transition: all 0.2s ease !important;
 }
 button[data-baseweb="tab"][aria-selected="true"] {
-    color: #38bdf8 !important;
-    border-bottom: 2px solid #38bdf8 !important;
-    background: rgba(56, 189, 248, 0.08) !important;
+    color: #2563eb !important;
+    border-bottom: 2px solid #2563eb !important;
+    background: rgba(37, 99, 235, 0.06) !important;
 }
 
-/* Action Buttons */
+/* Clean Blue Action Buttons */
 div[data-testid="stButton"] button, div[data-testid="stDownloadButton"] button {
-    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
     color: #ffffff !important;
-    border: 1px solid rgba(56, 189, 248, 0.4) !important;
+    border: 1px solid rgba(37, 99, 235, 0.3) !important;
     border-radius: 8px !important;
     font-family: 'Outfit', sans-serif !important;
     font-weight: 600 !important;
     padding: 8px 18px !important;
-    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.22) !important;
     transition: all 0.2s ease !important;
 }
 div[data-testid="stButton"] button:hover, div[data-testid="stDownloadButton"] button:hover {
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.6) !important;
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.38) !important;
     transform: translateY(-1px) !important;
 }
 
-/* Pulsing Cyber Beacons */
-@keyframes radar-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+/* Subtle Pulsing Radar Indicators */
+@keyframes radar-pulse-light {
+    0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.65); }
+    70% { box-shadow: 0 0 0 8px rgba(5, 150, 105, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
 }
-@keyframes alert-pulse {
-    0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+@keyframes alert-pulse-light {
+    0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.65); }
+    70% { box-shadow: 0 0 0 8px rgba(225, 29, 72, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
 }
 .pulse-secure {
     display: inline-block;
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: #10b981;
-    animation: radar-pulse 1.8s infinite;
+    background: #059669;
+    animation: radar-pulse-light 1.8s infinite;
     margin-right: 6px;
     vertical-align: middle;
 }
 .pulse-threat {
     display: inline-block;
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: #f43f5e;
-    animation: alert-pulse 1.2s infinite;
+    background: #e11d48;
+    animation: alert-pulse-light 1.2s infinite;
     margin-right: 6px;
     vertical-align: middle;
 }
 
-/* Mobile-Friendly Adjustments */
+/* Mobile-First Layout Rules */
 @media (max-width: 768px) {
     .main .block-container {
         padding-left: 0.75rem !important;
         padding-right: 0.75rem !important;
-        padding-top: 1.2rem !important;
+        padding-top: 1rem !important;
     }
     div[data-testid="stMetric"] {
         padding: 10px 12px !important;
     }
     div[data-testid="stMetricValue"] {
-        font-size: 1.3rem !important;
+        font-size: 1.25rem !important;
     }
 }
 </style>
 """
-st.markdown(CYBER_CSS, unsafe_allow_html=True)
+st.markdown(LIGHT_THEME_CSS, unsafe_allow_html=True)
 
 
 @st.cache_resource
@@ -288,13 +288,13 @@ def build_topology_figure(df, probabilities, gcn_weights, threshold):
         figure.add_trace(go.Scatter(
             x=[src_x, dst_x], y=[src_y, dst_y], mode="lines",
             line={
-                "color": "#f43f5e" if malicious else "rgba(14, 165, 233, 0.45)",
+                "color": "#e11d48" if malicious else "rgba(37, 99, 235, 0.4)",
                 "width": 2.5 + 4.5 * probability if malicious else 1.2,
             },
-            opacity=0.90,
+            opacity=0.88,
             text=[
                 f"<b>{src_ip} → {dst_ip}</b><br>"
-                f"Attack Prob: <span style='color:{'#f43f5e' if malicious else '#38bdf8'}'>{probability:.1%}</span><br>"
+                f"Attack Prob: <span style='color:{'#e11d48' if malicious else '#2563eb'};font-weight:700;'>{probability:.1%}</span><br>"
                 f"GCN Weight: {propagation:.4f}<br>"
                 f"Packets in Window: {edge['count']}<br>"
                 f"Timestamp: {row['FLOW_START_TIMESTAMP']}"
@@ -317,7 +317,7 @@ def build_topology_figure(df, probabilities, gcn_weights, threshold):
         )
         node_text.append(f"<b>Host:</b> {ip_address}<br>Active Degree: {degree}")
         node_labels.append(ip_address if ip_address in labelled_nodes else "")
-        node_color.append("#f43f5e" if flagged else "#0ea5e9")
+        node_color.append("#e11d48" if flagged else "#059669")
         node_size.append(12 + min(degree, 16))
 
     figure.add_trace(go.Scatter(
@@ -325,13 +325,13 @@ def build_topology_figure(df, probabilities, gcn_weights, threshold):
         text=node_labels, textposition="top center",
         hovertext=node_text, hovertemplate="%{hovertext}<extra></extra>",
         marker={"size": node_size, "color": node_color,
-                "line": {"width": 1.5, "color": "#ffffff"}},
+                "line": {"width": 2.0, "color": "#ffffff"}},
         showlegend=False,
     ))
     figure.update_layout(
         height=480, margin={"l": 8, "r": 8, "t": 8, "b": 8},
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
-        font={"color": "#94a3b8", "family": "Inter, sans-serif"},
+        paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+        font={"color": "#475569", "family": "Inter, sans-serif"},
         xaxis={"visible": False, "fixedrange": True},
         yaxis={"visible": False, "fixedrange": True, "scaleanchor": "x"},
         hovermode="closest",
@@ -357,7 +357,7 @@ def build_attention_figure(df, attention, probabilities, threshold):
             f"Attack Prob: {probabilities[index]:.1%}<br>"
             f"Timestamp: {timestamps[index]}"
         )
-        colors.append("#f43f5e" if probabilities[index] >= threshold else "#06b6d4")
+        colors.append("#e11d48" if probabilities[index] >= threshold else "#2563eb")
 
     figure = go.Figure(go.Bar(
         x=attention[top_indices], y=labels, orientation="h",
@@ -367,10 +367,10 @@ def build_attention_figure(df, attention, probabilities, threshold):
     figure.update_layout(
         height=480, margin={"l": 12, "r": 12, "t": 8, "b": 8},
         xaxis_title="Self-Attention Weight (Correlation to Decision)",
-        xaxis={"gridcolor": "rgba(255,255,255,0.06)", "color": "#94a3b8"},
-        yaxis={"automargin": True, "color": "#cbd5e1"},
-        font={"family": "Inter, sans-serif", "color": "#cbd5e1"},
-        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        xaxis={"gridcolor": "#f1f5f9", "color": "#64748b"},
+        yaxis={"automargin": True, "color": "#334155"},
+        font={"family": "Inter, sans-serif", "color": "#334155"},
+        paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
     )
     return figure
 
@@ -398,15 +398,25 @@ def diagnose_threat(row):
 model, prep, meta = load_assets()
 stream_df = pd.read_csv("processed/test.csv")
 
-# Sidebar Configuration & Telemetry Specs
+# Clean White Sidebar Configuration
 with st.sidebar:
     st.markdown(
         """
         <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
-            <span style="font-size:26px;">🛡️</span>
+            <div style="
+                width: 36px;
+                height: 36px;
+                border-radius: 8px;
+                background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #bfdbfe;
+                font-size: 18px;
+            ">🛡️</div>
             <div>
-                <div style="font-family:'Outfit',sans-serif; font-size:1.15rem; font-weight:800; color:#38bdf8;">AEGIS CONTROLS</div>
-                <div style="font-size:0.75rem; color:#94a3b8;">SOC Autonomous Telemetry</div>
+                <div style="font-family:'Outfit',sans-serif; font-size:1.1rem; font-weight:800; color:#0f172a;">AEGIS CONTROLS</div>
+                <div style="font-size:0.75rem; color:#64748b;">SOC Autonomous Telemetry</div>
             </div>
         </div>
         """,
@@ -437,19 +447,19 @@ with st.sidebar:
     st.markdown("### 🔬 System Architecture")
     st.markdown(
         """
-        <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px; font-size:0.8rem; line-height:1.6;">
-            <div><strong style="color:#38bdf8;">• Spatial AI:</strong> 2-Layer GCN (PyG)</div>
-            <div><strong style="color:#06b6d4;">• Temporal AI:</strong> 4-Head Transformer</div>
-            <div><strong style="color:#10b981;">• Loss Function:</strong> Focal Loss (&gamma;=2)</div>
-            <div><strong style="color:#a855f7;">• Prefix Window:</strong> Early k &le; 20%</div>
-            <div><strong style="color:#f43f5e;">• Latency:</strong> &lt; 50ms per window</div>
+        <div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px; font-size:0.8rem; line-height:1.6;">
+            <div><strong style="color:#2563eb;">• Spatial AI:</strong> 2-Layer GCN (PyG)</div>
+            <div><strong style="color:#0284c7;">• Temporal AI:</strong> 4-Head Transformer</div>
+            <div><strong style="color:#059669;">• Loss Function:</strong> Focal Loss (&gamma;=2)</div>
+            <div><strong style="color:#7c3aed;">• Prefix Window:</strong> Early k &le; 20%</div>
+            <div><strong style="color:#e11d48;">• Latency:</strong> &lt; 50ms per window</div>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
 
-# Top Command Hero Banner (Compact, Responsive, Minimalist)
+# Top Command Hero Banner (Light Mode, Compact, Responsive, Minimalist)
 st.markdown(
     """
     <div style="
@@ -457,49 +467,47 @@ st.markdown(
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.6) 100%);
-        border: 1px solid rgba(56, 189, 248, 0.25);
-        border-radius: 14px;
-        padding: 14px 20px;
-        margin-bottom: 20px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-        backdrop-filter: blur(12px);
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 14px 18px;
+        margin-bottom: 16px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.02);
     ">
-        <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
             <div style="
-                width: 44px;
-                height: 44px;
+                width: 42px;
+                height: 42px;
                 border-radius: 10px;
-                background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%);
+                background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border: 1px solid rgba(56, 189, 248, 0.4);
-                box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
-                font-size: 22px;
+                border: 1px solid #bfdbfe;
+                font-size: 20px;
             ">🛡️</div>
             <div>
-                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                    <span style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(90deg, #f8fafc 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AEGIS CYBER DEFENSE AI</span>
-                    <span style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; display: inline-flex; align-items: center;"><span class="pulse-secure"></span>LIVE SOC FEED</span>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span style="font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 800; color: #0f172a; letter-spacing: -0.02em;">AEGIS CYBER DEFENSE AI</span>
+                    <span style="background: #ecfdf5; border: 1px solid #a7f3d0; color: #065f46; font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; display: inline-flex; align-items: center;"><span class="pulse-secure"></span>LIVE SOC FEED</span>
                 </div>
-                <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">
+                <div style="font-size: 0.8rem; color: #64748b; margin-top: 2px;">
                     Hybrid Spatio-Temporal Graph Neural Network & Self-Attention Engine • Early Reconnaissance Interception
                 </div>
             </div>
         </div>
-        <div style="display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap;">
-            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 6px 12px; font-size: 0.75rem; text-align: center;">
+        <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 5px 12px; font-size: 0.72rem; text-align: center;">
                 <div style="color: #64748b; font-weight: 600;">MODEL ACCURACY</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #38bdf8;">99.42%</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #2563eb;">99.42%</div>
             </div>
-            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 6px 12px; font-size: 0.75rem; text-align: center;">
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 5px 12px; font-size: 0.72rem; text-align: center;">
                 <div style="color: #64748b; font-weight: 600;">ROC-AUC SCORE</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981;">0.9995</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #059669;">0.9995</div>
             </div>
-            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 6px 12px; font-size: 0.75rem; text-align: center;">
+            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 5px 12px; font-size: 0.72rem; text-align: center;">
                 <div style="color: #64748b; font-weight: 600;">KILL-CHAIN STAGE</div>
-                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #a855f7;">Recon (k&le;20%)</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #7c3aed;">Recon (k&le;20%)</div>
             </div>
         </div>
     </div>
@@ -551,7 +559,7 @@ def render_live_dashboard():
         else:
             current_index += 1
 
-        # 4 Responsive Glassmorphic Metrics
+        # 4 Responsive Glass-White Metric Cards
         metric_cols = st.columns(4)
         with metric_cols[0]:
             st.metric("System Threat Status", threat_level)
@@ -562,31 +570,31 @@ def render_live_dashboard():
         with metric_cols[3]:
             st.metric("Replay Ingest Rate", f"{replay_rate:.1f} flows/s")
 
-        # Dynamic High-End Status Callout
+        # Dynamic Light-Mode Status Callout
         if latest_prob >= threshold:
             threat_type, rec_action = diagnose_threat(recent_df.iloc[-1])
             st.markdown(
                 f"""
                 <div style="
-                    background: linear-gradient(135deg, rgba(244, 63, 94, 0.16) 0%, rgba(15, 23, 42, 0.9) 100%);
-                    border: 1px solid #f43f5e;
-                    border-left: 5px solid #f43f5e;
+                    background: #fff1f2;
+                    border: 1px solid #fecdd3;
+                    border-left: 5px solid #e11d48;
                     border-radius: 10px;
-                    padding: 12px 18px;
-                    margin: 14px 0 18px 0;
-                    box-shadow: 0 0 25px rgba(244, 63, 94, 0.25);
+                    padding: 12px 16px;
+                    margin: 12px 0 16px 0;
+                    box-shadow: 0 1px 4px rgba(225, 29, 72, 0.08);
                 ">
                     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: #fda4af; display: inline-flex; align-items: center;">
+                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.92rem; color: #9f1239; display: inline-flex; align-items: center;">
                             <span class="pulse-threat"></span>🚨 ACTIVE CYBER ATTACK INTERCEPTED
                         </span>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: #f43f5e; background: rgba(244, 63, 94, 0.18); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(244, 63, 94, 0.35);">
-                            THREAT CONFIDENCE: {latest_prob:.1%}
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; font-weight: 700; color: #be123c; background: #ffe4e6; padding: 2px 8px; border-radius: 6px; border: 1px solid #fecdd3;">
+                            CONFIDENCE: {latest_prob:.1%}
                         </span>
                     </div>
-                    <div style="font-size: 0.85rem; color: #e2e8f0; margin-top: 6px;">
-                        <strong style="color: #fecdd3;">Diagnosed Vector:</strong> {threat_type} &nbsp;|&nbsp;
-                        <strong style="color: #fecdd3;">Recommended SOC Mitigation:</strong> <code style="background: rgba(0,0,0,0.5); color: #38bdf8; padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">{rec_action}</code>
+                    <div style="font-size: 0.82rem; color: #475569; margin-top: 6px;">
+                        <strong style="color: #9f1239;">Diagnosed Vector:</strong> {threat_type} &nbsp;|&nbsp;
+                        <strong style="color: #0f172a;">Recommended SOC Mitigation:</strong> <code style="background: #ffffff; color: #1e40af; padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; border: 1px solid #e2e8f0;">{rec_action}</code>
                     </div>
                 </div>
                 """,
@@ -596,22 +604,22 @@ def render_live_dashboard():
             st.markdown(
                 f"""
                 <div style="
-                    background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%);
-                    border: 1px solid rgba(245, 158, 11, 0.45);
-                    border-left: 5px solid #f59e0b;
+                    background: #fffbeb;
+                    border: 1px solid #fde68a;
+                    border-left: 5px solid #d97706;
                     border-radius: 10px;
-                    padding: 12px 18px;
-                    margin: 14px 0 18px 0;
+                    padding: 10px 16px;
+                    margin: 12px 0 16px 0;
                 ">
                     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.92rem; color: #fcd34d;">
+                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; color: #92400e;">
                             ⚠️ ELEVATED TELEMETRY DETECTED
                         </span>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #f59e0b;">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; color: #b45309;">
                             PROBABILITY: {latest_prob:.1%}
                         </span>
                     </div>
-                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 4px;">
+                    <div style="font-size: 0.8rem; color: #78350f; margin-top: 4px;">
                         Slight deviations in packet inter-arrival times or port sweeps observed. Monitoring sliding prefix window.
                     </div>
                 </div>
@@ -622,18 +630,18 @@ def render_live_dashboard():
             st.markdown(
                 f"""
                 <div style="
-                    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%);
-                    border: 1px solid rgba(16, 185, 129, 0.35);
+                    background: #f0fdf4;
+                    border: 1px solid #bbf7d0;
                     border-left: 5px solid #10b981;
                     border-radius: 10px;
-                    padding: 10px 18px;
-                    margin: 14px 0 18px 0;
+                    padding: 10px 16px;
+                    margin: 12px 0 16px 0;
                 ">
                     <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
-                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: #6ee7b7; display: inline-flex; align-items: center;">
+                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.88rem; color: #166534; display: inline-flex; align-items: center;">
                             <span class="pulse-secure"></span>🛡️ ALL HOSTS SECURE — TRAFFIC CONFORMS TO BENIGN BASELINE
                         </span>
-                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; color: #10b981; background: rgba(16, 185, 129, 0.12); padding: 2px 8px; border-radius: 6px;">
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; color: #15803d; background: #dcfce7; padding: 2px 8px; border-radius: 6px;">
                             BASELINE INTEGRITY: {1.0 - latest_prob:.1%}
                         </span>
                     </div>
@@ -729,9 +737,9 @@ with tab_tech:
     with col1:
         st.markdown(
             """
-            <div style="background:rgba(15,23,42,0.7); border:1px solid rgba(56,189,248,0.2); border-radius:12px; padding:18px; height:100%;">
-                <h4 style="color:#38bdf8; margin-top:0;">🛠️ 1. Core Deep Learning Stack</h4>
-                <ul style="color:#cbd5e1; font-size:0.88rem; line-height:1.7; padding-left:20px;">
+            <div style="background:#ffffff; border:1px solid #bfdbfe; border-radius:12px; padding:18px; box-shadow:0 1px 3px rgba(0,0,0,0.04); height:100%;">
+                <h4 style="color:#2563eb; margin-top:0;">🛠️ 1. Core Deep Learning Stack</h4>
+                <ul style="color:#334155; font-size:0.88rem; line-height:1.7; padding-left:20px;">
                     <li><strong>PyTorch & PyTorch Geometric (PyG):</strong> Powers GPU/CPU message passing algorithms, graph convolutions, and tensor operations.</li>
                     <li><strong>Spatial Graph Convolution (GCN):</strong> 2-Layer message-passing network aggregating telemetry across communicating IP nodes and subnet neighbors.</li>
                     <li><strong>Temporal Transformer Encoder:</strong> 4-Head multi-head self-attention network capturing time-series cadence, packet bursts, and microsecond inter-arrival intervals.</li>
@@ -746,9 +754,9 @@ with tab_tech:
     with col2:
         st.markdown(
             """
-            <div style="background:rgba(15,23,42,0.7); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:18px; height:100%;">
-                <h4 style="color:#10b981; margin-top:0;">🎯 2. The 4-Stage Detection Pipeline</h4>
-                <ol style="color:#cbd5e1; font-size:0.88rem; line-height:1.7; padding-left:20px;">
+            <div style="background:#ffffff; border:1px solid #bbf7d0; border-radius:12px; padding:18px; box-shadow:0 1px 3px rgba(0,0,0,0.04); height:100%;">
+                <h4 style="color:#059669; margin-top:0;">🎯 2. The 4-Stage Detection Pipeline</h4>
+                <ol style="color:#334155; font-size:0.88rem; line-height:1.7; padding-left:20px;">
                     <li><strong>Encrypted Telemetry Extraction:</strong> Inspects network flow metadata (5-tuple, bytes, packets, TCP flags, IAT) without requiring payload decryption.</li>
                     <li><strong>Spatial Structural Aggregation:</strong> Translates communicating endpoints into dynamic graph nodes to catch subnet sweeps, port scans, and lateral pivoting.</li>
                     <li><strong>Temporal Rhythm Modeling:</strong> Transformer self-attention correlates faint reconnaissance probes with subsequent attack spikes.</li>
@@ -759,7 +767,7 @@ with tab_tech:
             unsafe_allow_html=True,
         )
 
-    st.markdown("<div style='height: 18px;'></div>", unsafe_allow_html=True)
+    st.markdown("<div style='height: 16px;'></div>", unsafe_allow_html=True)
 
     st.markdown("#### ⚖️ Traditional Firewalls vs. Our Hybrid AI Framework")
     comparison_data = {
