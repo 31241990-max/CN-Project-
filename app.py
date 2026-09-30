@@ -14,6 +14,167 @@ from src.data_pipeline import FlowPreprocessor
 from src.model import HybridGNNTransformer
 
 
+st.set_page_config(
+    page_title="AEGIS | Cyber Threat Defense AI",
+    page_icon="🛡️",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
+
+# High-Tech Cyber Command Center CSS
+CYBER_CSS = """
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+:root {
+    --bg-base: #060913;
+    --card-surface: rgba(15, 23, 42, 0.72);
+    --card-border: rgba(56, 189, 248, 0.18);
+    --cyan-glow: #06b6d4;
+    --blue-neon: #38bdf8;
+    --red-alert: #f43f5e;
+    --emerald-safe: #10b981;
+    --amber-warn: #f59e0b;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+}
+
+/* Global App Styling */
+.stApp {
+    background: radial-gradient(circle at 50% -10%, #0f1d3a 0%, #070b16 55%, #04060d 100%) !important;
+    font-family: 'Inter', -apple-system, sans-serif !important;
+    color: var(--text-primary) !important;
+}
+
+/* Compact Headings */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif !important;
+    letter-spacing: -0.02em !important;
+    color: #f1f5f9 !important;
+}
+
+/* Glassmorphic Metric Cards */
+div[data-testid="stMetric"] {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.45) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-top: 1px solid rgba(56, 189, 248, 0.3) !important;
+    border-radius: 12px !important;
+    padding: 14px 18px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+    backdrop-filter: blur(12px) !important;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+div[data-testid="stMetric"]:hover {
+    border-color: rgba(56, 189, 248, 0.5) !important;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.18) !important;
+    transform: translateY(-2px) !important;
+}
+div[data-testid="stMetricLabel"] {
+    font-family: 'Outfit', sans-serif !important;
+    font-size: 0.78rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.06em !important;
+    color: #94a3b8 !important;
+}
+div[data-testid="stMetricValue"] {
+    font-family: 'JetBrains Mono', monospace !important;
+    font-size: 1.65rem !important;
+    font-weight: 700 !important;
+    color: #f8fafc !important;
+}
+
+/* Sidebar Aesthetics */
+section[data-testid="stSidebar"] {
+    background: linear-gradient(180deg, rgba(9, 14, 28, 0.96) 0%, rgba(5, 8, 16, 0.98) 100%) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.07) !important;
+    backdrop-filter: blur(16px) !important;
+}
+
+/* Tab Navigation Styling */
+button[data-baseweb="tab"] {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.92rem !important;
+    border-radius: 8px 8px 0 0 !important;
+    padding: 10px 22px !important;
+    color: #94a3b8 !important;
+    transition: all 0.2s ease !important;
+}
+button[data-baseweb="tab"][aria-selected="true"] {
+    color: #38bdf8 !important;
+    border-bottom: 2px solid #38bdf8 !important;
+    background: rgba(56, 189, 248, 0.08) !important;
+}
+
+/* Action Buttons */
+div[data-testid="stButton"] button, div[data-testid="stDownloadButton"] button {
+    background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(56, 189, 248, 0.4) !important;
+    border-radius: 8px !important;
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600 !important;
+    padding: 8px 18px !important;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3) !important;
+    transition: all 0.2s ease !important;
+}
+div[data-testid="stButton"] button:hover, div[data-testid="stDownloadButton"] button:hover {
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.6) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Pulsing Cyber Beacons */
+@keyframes radar-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+@keyframes alert-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+}
+.pulse-secure {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: radar-pulse 1.8s infinite;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+.pulse-threat {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #f43f5e;
+    animation: alert-pulse 1.2s infinite;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+/* Mobile-Friendly Adjustments */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        padding-top: 1.2rem !important;
+    }
+    div[data-testid="stMetric"] {
+        padding: 10px 12px !important;
+    }
+    div[data-testid="stMetricValue"] {
+        font-size: 1.3rem !important;
+    }
+}
+</style>
+"""
+st.markdown(CYBER_CSS, unsafe_allow_html=True)
+
+
 @st.cache_resource
 def load_assets():
     out = Path("outputs")
@@ -72,7 +233,7 @@ def build_snapshot(df_window, prep, num_nodes):
 def predict_window(model, prep, meta, df_window):
     snapshot = build_snapshot(df_window, prep, meta["num_nodes"])
     if snapshot is None:
-        return None, None, None
+        return None, None, None, None, None
 
     node_x = torch.from_numpy(snapshot["node_features"]).float()
     edge_index = torch.from_numpy(snapshot["edge_index"]).long()
@@ -126,14 +287,17 @@ def build_topology_figure(df, probabilities, gcn_weights, threshold):
         malicious = probability >= threshold
         figure.add_trace(go.Scatter(
             x=[src_x, dst_x], y=[src_y, dst_y], mode="lines",
-            line={"color": "#d64b4b" if malicious else "#72939a",
-                  "width": 1.5 + 4.5 * probability},
-            opacity=0.82,
+            line={
+                "color": "#f43f5e" if malicious else "rgba(14, 165, 233, 0.45)",
+                "width": 2.5 + 4.5 * probability if malicious else 1.2,
+            },
+            opacity=0.90,
             text=[
-                f"{src_ip} → {dst_ip}<br>Attack probability: {probability:.3f}"
-                f"<br>GCN propagation weight: {propagation:.4f}"
-                f"<br>Flows in window: {edge['count']}"
-                f"<br>Timestamp: {row['FLOW_START_TIMESTAMP']}"
+                f"<b>{src_ip} → {dst_ip}</b><br>"
+                f"Attack Prob: <span style='color:{'#f43f5e' if malicious else '#38bdf8'}'>{probability:.1%}</span><br>"
+                f"GCN Weight: {propagation:.4f}<br>"
+                f"Packets in Window: {edge['count']}<br>"
+                f"Timestamp: {row['FLOW_START_TIMESTAMP']}"
             ] * 2,
             hovertemplate="%{text}<extra></extra>",
             showlegend=False,
@@ -151,9 +315,9 @@ def build_topology_figure(df, probabilities, gcn_weights, threshold):
             and edge["probability"] >= threshold
             for (src, dst), edge in edge_groups.items()
         )
-        node_text.append(f"{ip_address}<br>Connections: {degree}")
+        node_text.append(f"<b>Host:</b> {ip_address}<br>Active Degree: {degree}")
         node_labels.append(ip_address if ip_address in labelled_nodes else "")
-        node_color.append("#d64b4b" if flagged else "#2f8f83")
+        node_color.append("#f43f5e" if flagged else "#0ea5e9")
         node_size.append(12 + min(degree, 16))
 
     figure.add_trace(go.Scatter(
@@ -165,8 +329,9 @@ def build_topology_figure(df, probabilities, gcn_weights, threshold):
         showlegend=False,
     ))
     figure.update_layout(
-        height=520, margin={"l": 8, "r": 8, "t": 8, "b": 8},
+        height=480, margin={"l": 8, "r": 8, "t": 8, "b": 8},
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        font={"color": "#94a3b8", "family": "Inter, sans-serif"},
         xaxis={"visible": False, "fixedrange": True},
         yaxis={"visible": False, "fixedrange": True, "scaleanchor": "x"},
         hovermode="closest",
@@ -188,11 +353,11 @@ def build_attention_figure(df, attention, probabilities, threshold):
         labels.append(f"#{index + 1} {src_ip} → {dst_ip}")
         details.append(
             f"Attention: {attention[index]:.4f}<br>"
-            f"Inter-arrival: {inter_arrival[index]:.6g}<br>"
-            f"Attack probability: {probabilities[index]:.3f}<br>"
+            f"Inter-arrival: {inter_arrival[index]:.6g}s<br>"
+            f"Attack Prob: {probabilities[index]:.1%}<br>"
             f"Timestamp: {timestamps[index]}"
         )
-        colors.append("#d64b4b" if probabilities[index] >= threshold else "#2f8f83")
+        colors.append("#f43f5e" if probabilities[index] >= threshold else "#06b6d4")
 
     figure = go.Figure(go.Bar(
         x=attention[top_indices], y=labels, orientation="h",
@@ -200,45 +365,14 @@ def build_attention_figure(df, attention, probabilities, threshold):
         hovertemplate="%{customdata}<extra></extra>",
     ))
     figure.update_layout(
-        height=520, margin={"l": 12, "r": 12, "t": 8, "b": 8},
-        xaxis_title="Mean attention from the latest packet",
-        yaxis={"automargin": True},
+        height=480, margin={"l": 12, "r": 12, "t": 8, "b": 8},
+        xaxis_title="Self-Attention Weight (Correlation to Decision)",
+        xaxis={"gridcolor": "rgba(255,255,255,0.06)", "color": "#94a3b8"},
+        yaxis={"automargin": True, "color": "#cbd5e1"},
+        font={"family": "Inter, sans-serif", "color": "#cbd5e1"},
         paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
     )
     return figure
-
-
-st.set_page_config(page_title="Cyber Threat Monitor", layout="wide")
-st.title("Cyber Threat Monitoring Dashboard")
-
-model, prep, meta = load_assets()
-
-with st.sidebar:
-    st.header("Configuration")
-    default_threshold = min(0.99, max(0.01, float(meta.get("decision_threshold", 0.5))))
-    threshold = st.slider("Threat detection threshold", 0.01, 0.99, default_threshold, step=0.01)
-    window_size = st.number_input(
-        "Window size", min_value=8, max_value=max(8, int(meta["window_size"])),
-        value=min(128, max(8, int(meta["window_size"]))), step=8,
-    )
-    refresh_seconds = st.slider("Refresh interval (seconds)", 0.5, 5.0, 1.0, step=0.5)
-    st.caption("The model evaluates the most recent stream window and updates the dashboard in real time.")
-    st.divider()
-    st.markdown("### 🛠️ Architecture Stack")
-    st.markdown(
-        "• **Spatial AI:** 2-Layer GCN (PyG)  \n"
-        "• **Temporal AI:** 4-Head Transformer  \n"
-        "• **Loss Function:** Class-Weighted Focal Loss  \n"
-        "• **Graph Engine:** NetworkX & Plotly  \n"
-        "• **Latency:** <50ms per window"
-    )
-
-stream_df = pd.read_csv("processed/test.csv")
-
-tab_monitor, tab_tech = st.tabs([
-    "🔴 Live Threat Monitor",
-    "🧠 Technology & Detection Methodology"
-])
 
 
 def diagnose_threat(row):
@@ -260,15 +394,136 @@ def diagnose_threat(row):
         return "Spatio-Temporal Flow Anomaly", f"Inspect traffic logs for host {src}"
 
 
+# Load Deep Learning Assets & Telemetry Data
+model, prep, meta = load_assets()
+stream_df = pd.read_csv("processed/test.csv")
+
+# Sidebar Configuration & Telemetry Specs
+with st.sidebar:
+    st.markdown(
+        """
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+            <span style="font-size:26px;">🛡️</span>
+            <div>
+                <div style="font-family:'Outfit',sans-serif; font-size:1.15rem; font-weight:800; color:#38bdf8;">AEGIS CONTROLS</div>
+                <div style="font-size:0.75rem; color:#94a3b8;">SOC Autonomous Telemetry</div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.subheader("⚙️ Detection Sensitivity")
+    default_threshold = 0.65
+    threshold = st.slider("Threat Decision Threshold", 0.05, 0.95, default_threshold, step=0.01)
+    st.caption("Threshold where hybrid spatio-temporal signals trigger defensive alert state.")
+
+    window_size = st.number_input(
+        "Observation Window (Packets)",
+        min_value=8,
+        max_value=max(8, int(meta["window_size"])),
+        value=min(128, max(8, int(meta["window_size"]))),
+        step=8,
+    )
+    refresh_seconds = st.slider("Replay Refresh Rate (s)", 0.5, 4.0, 1.0, step=0.5)
+
+    if st.button("🔄 Reset Ingest Stream", width="stretch"):
+        st.session_state.current_index = 0
+        st.session_state.alerts = []
+        st.session_state.total_inspected = 0
+        st.rerun()
+
+    st.divider()
+    st.markdown("### 🔬 System Architecture")
+    st.markdown(
+        """
+        <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px; font-size:0.8rem; line-height:1.6;">
+            <div><strong style="color:#38bdf8;">• Spatial AI:</strong> 2-Layer GCN (PyG)</div>
+            <div><strong style="color:#06b6d4;">• Temporal AI:</strong> 4-Head Transformer</div>
+            <div><strong style="color:#10b981;">• Loss Function:</strong> Focal Loss (&gamma;=2)</div>
+            <div><strong style="color:#a855f7;">• Prefix Window:</strong> Early k &le; 20%</div>
+            <div><strong style="color:#f43f5e;">• Latency:</strong> &lt; 50ms per window</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+# Top Command Hero Banner (Compact, Responsive, Minimalist)
+st.markdown(
+    """
+    <div style="
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.6) 100%);
+        border: 1px solid rgba(56, 189, 248, 0.25);
+        border-radius: 14px;
+        padding: 14px 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(12px);
+    ">
+        <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="
+                width: 44px;
+                height: 44px;
+                border-radius: 10px;
+                background: linear-gradient(135deg, #0284c7 0%, #0f172a 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid rgba(56, 189, 248, 0.4);
+                box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+                font-size: 22px;
+            ">🛡️</div>
+            <div>
+                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                    <span style="font-family: 'Outfit', sans-serif; font-size: 1.35rem; font-weight: 800; letter-spacing: -0.02em; background: linear-gradient(90deg, #f8fafc 0%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AEGIS CYBER DEFENSE AI</span>
+                    <span style="background: rgba(16, 185, 129, 0.15); border: 1px solid #10b981; color: #34d399; font-size: 0.72rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; font-family: 'JetBrains Mono', monospace; display: inline-flex; align-items: center;"><span class="pulse-secure"></span>LIVE SOC FEED</span>
+                </div>
+                <div style="font-size: 0.82rem; color: #94a3b8; margin-top: 2px;">
+                    Hybrid Spatio-Temporal Graph Neural Network & Self-Attention Engine • Early Reconnaissance Interception
+                </div>
+            </div>
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 8px; flex-wrap: wrap;">
+            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 6px 12px; font-size: 0.75rem; text-align: center;">
+                <div style="color: #64748b; font-weight: 600;">MODEL ACCURACY</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #38bdf8;">99.42%</div>
+            </div>
+            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 6px 12px; font-size: 0.75rem; text-align: center;">
+                <div style="color: #64748b; font-weight: 600;">ROC-AUC SCORE</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #10b981;">0.9995</div>
+            </div>
+            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 6px 12px; font-size: 0.75rem; text-align: center;">
+                <div style="color: #64748b; font-weight: 600;">KILL-CHAIN STAGE</div>
+                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 700; color: #a855f7;">Recon (k&le;20%)</div>
+            </div>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+tab_monitor, tab_tech = st.tabs([
+    "🔴 Live Threat Monitor",
+    "🧠 Technology & Detection Methodology"
+])
+
+
 @st.fragment(run_every=refresh_seconds)
 def render_live_dashboard():
     current_index = st.session_state.get("current_index", 0)
     alerts = st.session_state.setdefault("alerts", [])
-    total_inspected = st.session_state.setdefault("total_inspected", 0)
+    st.session_state.setdefault("total_inspected", 0)
     now = time.perf_counter()
     previous_tick = st.session_state.get("previous_rate_tick")
     replay_rate = 0.0 if previous_tick is None else 1.0 / max(now - previous_tick, 1e-6)
     st.session_state.previous_rate_tick = now
+
     if len(stream_df) == 0:
         st.info("Waiting for stream data...")
         return
@@ -289,51 +544,121 @@ def render_live_dashboard():
 
     if prob is not None:
         latest_prob = float(prob[-1])
-        latest_label = int(labels[-1]) if len(labels) > 0 else 0
         threat_level = "CRITICAL HIGH" if latest_prob >= threshold else ("ELEVATED" if latest_prob >= 0.30 else "NORMAL")
+
         if current_index >= len(stream_df) - 1:
             current_index = 0
         else:
             current_index += 1
 
+        # 4 Responsive Glassmorphic Metrics
         metric_cols = st.columns(4)
         with metric_cols[0]:
             st.metric("System Threat Status", threat_level)
         with metric_cols[1]:
-            st.metric("Active IP Hosts", str(len(set(recent_df["src_node_id"]).union(set(recent_df["dst_node_id"])))))
-        with metric_cols[2]:
-            st.metric("Replay Ingest Rate", f"{replay_rate:.1f} flows/s")
-        with metric_cols[3]:
             st.metric("Attack Confidence", f"{latest_prob:.1%}")
+        with metric_cols[2]:
+            st.metric("Active Network Hosts", str(len(set(recent_df["src_node_id"]).union(set(recent_df["dst_node_id"])))))
+        with metric_cols[3]:
+            st.metric("Replay Ingest Rate", f"{replay_rate:.1f} flows/s")
 
-        # Visual Status Callout
+        # Dynamic High-End Status Callout
         if latest_prob >= threshold:
             threat_type, rec_action = diagnose_threat(recent_df.iloc[-1])
-            st.error(
-                f"🚨 **ACTIVE ATTACK DETECTED** | Confidence: **{latest_prob:.1%}** (Threshold: {threshold:.0%})  \n"
-                f"**Type:** {threat_type} &nbsp;|&nbsp; **Recommended SOC Action:** `{rec_action}`"
+            st.markdown(
+                f"""
+                <div style="
+                    background: linear-gradient(135deg, rgba(244, 63, 94, 0.16) 0%, rgba(15, 23, 42, 0.9) 100%);
+                    border: 1px solid #f43f5e;
+                    border-left: 5px solid #f43f5e;
+                    border-radius: 10px;
+                    padding: 12px 18px;
+                    margin: 14px 0 18px 0;
+                    box-shadow: 0 0 25px rgba(244, 63, 94, 0.25);
+                ">
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.95rem; color: #fda4af; display: inline-flex; align-items: center;">
+                            <span class="pulse-threat"></span>🚨 ACTIVE CYBER ATTACK INTERCEPTED
+                        </span>
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: #f43f5e; background: rgba(244, 63, 94, 0.18); padding: 3px 10px; border-radius: 6px; border: 1px solid rgba(244, 63, 94, 0.35);">
+                            THREAT CONFIDENCE: {latest_prob:.1%}
+                        </span>
+                    </div>
+                    <div style="font-size: 0.85rem; color: #e2e8f0; margin-top: 6px;">
+                        <strong style="color: #fecdd3;">Diagnosed Vector:</strong> {threat_type} &nbsp;|&nbsp;
+                        <strong style="color: #fecdd3;">Recommended SOC Mitigation:</strong> <code style="background: rgba(0,0,0,0.5); color: #38bdf8; padding: 2px 7px; border-radius: 4px; font-family: 'JetBrains Mono', monospace;">{rec_action}</code>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
             )
         elif latest_prob >= 0.30:
-            st.warning(f"⚠️ **ELEVATED NETWORK ACTIVITY** | Confidence: **{latest_prob:.1%}** — Flow exhibiting anomalous timing under observation.")
+            st.markdown(
+                f"""
+                <div style="
+                    background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(15, 23, 42, 0.85) 100%);
+                    border: 1px solid rgba(245, 158, 11, 0.45);
+                    border-left: 5px solid #f59e0b;
+                    border-radius: 10px;
+                    padding: 12px 18px;
+                    margin: 14px 0 18px 0;
+                ">
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.92rem; color: #fcd34d;">
+                            ⚠️ ELEVATED TELEMETRY DETECTED
+                        </span>
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #f59e0b;">
+                            PROBABILITY: {latest_prob:.1%}
+                        </span>
+                    </div>
+                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 4px;">
+                        Slight deviations in packet inter-arrival times or port sweeps observed. Monitoring sliding prefix window.
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
         else:
-            st.success(f"🛡️ **ALL SYSTEMS NORMAL** | Confidence: **{latest_prob:.1%}** — Traffic fully conforms to benign baseline telemetry.")
+            st.markdown(
+                f"""
+                <div style="
+                    background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.85) 100%);
+                    border: 1px solid rgba(16, 185, 129, 0.35);
+                    border-left: 5px solid #10b981;
+                    border-radius: 10px;
+                    padding: 10px 18px;
+                    margin: 14px 0 18px 0;
+                ">
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                        <span style="font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.9rem; color: #6ee7b7; display: inline-flex; align-items: center;">
+                            <span class="pulse-secure"></span>🛡️ ALL HOSTS SECURE — TRAFFIC CONFORMS TO BENIGN BASELINE
+                        </span>
+                        <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; color: #10b981; background: rgba(16, 185, 129, 0.12); padding: 2px 8px; border-radius: 6px;">
+                            BASELINE INTEGRITY: {1.0 - latest_prob:.1%}
+                        </span>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
 
+        # Side-by-Side Spatial & Temporal Visualizations
         topology_col, attention_col = st.columns([1.15, 0.85])
         with topology_col:
-            st.subheader("Network Topology Graph")
+            st.markdown("#### 🌐 Spatial Network Topology (GCN)")
             st.plotly_chart(
                 build_topology_figure(recent_df, prob, gcn_weights, threshold),
                 width="stretch", key="network-topology",
             )
         with attention_col:
-            st.subheader("Top Explanatory Packets (Self-Attention)")
-            st.caption("Attention highlights prior packets strongly correlated with the current threat decision.")
+            st.markdown("#### ⏱️ Explanatory Packets (Transformer Attention)")
+            st.caption("Self-attention weights connecting historical packet whispers to current threat diagnosis.")
             st.plotly_chart(
                 build_attention_figure(recent_df, attention, prob, threshold),
                 width="stretch", key="packet-attention",
             )
 
-        # Incident History & Alert Logging
+        # Incident History Logging
         if latest_prob >= threshold:
             last_alert_index = st.session_state.get("last_alert_index")
             if last_alert_index != current_index:
@@ -347,7 +672,7 @@ def render_live_dashboard():
                     alerts.pop(0)
 
         if alerts:
-            st.subheader("📋 Active Incident Log & Remediation Actions")
+            st.markdown("#### 📋 Active SOC Incident Log & Automated Actions")
             alert_records = []
             for a in reversed(alerts[-8:]):
                 r = a["row"]
@@ -362,7 +687,7 @@ def render_live_dashboard():
                     "Recommended Mitigation": act
                 })
             alert_df = pd.DataFrame(alert_records)
-            st.dataframe(alert_df, use_container_width=True, hide_index=True)
+            st.dataframe(alert_df, width="stretch", hide_index=True)
 
             csv_data = alert_df.to_csv(index=False).encode("utf-8")
             st.download_button(
@@ -373,7 +698,7 @@ def render_live_dashboard():
                 key="download-incident-csv",
             )
 
-        # Executive Metrics Summary
+        # AI Architecture & Verified Benchmarks Expander
         with st.expander("📊 AI Model Architecture & Verified Benchmarks", expanded=False):
             bench_cols = st.columns(4)
             bench_cols[0].metric("Model Accuracy", "99.42%")
@@ -392,93 +717,78 @@ with tab_monitor:
 
 
 with tab_tech:
-    st.header("🧠 System Architecture & Technology Stack")
+    st.markdown("### 🧠 System Architecture & Detection Methodology")
     st.markdown(
-        "This security platform is a **Hybrid Spatio-Temporal Deep Learning System** designed to predict and detect "
-        "cyber attacks during the **Reconnaissance Phase** of the Cyber Kill-Chain, before malicious payloads or ransomware can land."
+        "This platform is an **Autonomous Hybrid Spatio-Temporal Deep Learning Framework** designed to detect "
+        "and intercept cyber attacks during the **Reconnaissance Stage** ($k \\le 20\\%$ prefix window) "
+        "before malicious payloads or ransomware can land."
     )
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("🛠️ 1. Core Technology Stack")
         st.markdown(
-            r"""
-            * **Deep Learning Framework:** `PyTorch` (v2.0+) & `PyTorch Geometric (PyG)` (v2.5+)
-              - Powers tensor graph convolutions, message passing, and transformer attention.
-            * **Spatial Graph Neural Network (GCN):** 2-Layer Graph Convolutional Network
-              - Aggregates neighborhood telemetry across communicating IP nodes and hosts.
-            * **Temporal Sequence Modeling:** 4-Head Multi-Head Attention `TransformerEncoder`
-              - Models chronological packet rhythms, bursts, and time-series inter-arrival intervals.
-            * **Loss Optimization:** Class-Weighted **Focal Loss ($\gamma = 2$)**
-              - Counters heavy class imbalance (78% benign vs 22% attacks) without majority collapse.
-            * **Interactive Graph Visualization:** `NetworkX` & `Plotly`
-              - Generates interactive, hover-inspectable directed graph topologies.
-            * **Data Engineering & Preprocessing:** `Scikit-Learn` & `Joblib`
-              - Strict chronological split and isolated StandardScaler to prevent future data leakage.
-            * **Application Framework:** `Streamlit`
-              - Reactive real-time Security Operations Center (SOC) dashboard.
             """
+            <div style="background:rgba(15,23,42,0.7); border:1px solid rgba(56,189,248,0.2); border-radius:12px; padding:18px; height:100%;">
+                <h4 style="color:#38bdf8; margin-top:0;">🛠️ 1. Core Deep Learning Stack</h4>
+                <ul style="color:#cbd5e1; font-size:0.88rem; line-height:1.7; padding-left:20px;">
+                    <li><strong>PyTorch & PyTorch Geometric (PyG):</strong> Powers GPU/CPU message passing algorithms, graph convolutions, and tensor operations.</li>
+                    <li><strong>Spatial Graph Convolution (GCN):</strong> 2-Layer message-passing network aggregating telemetry across communicating IP nodes and subnet neighbors.</li>
+                    <li><strong>Temporal Transformer Encoder:</strong> 4-Head multi-head self-attention network capturing time-series cadence, packet bursts, and microsecond inter-arrival intervals.</li>
+                    <li><strong>Class-Weighted Focal Loss (&gamma; = 2):</strong> Mitigates severe real-world cyber class imbalance (78% benign vs 22% attacks) without majority class collapse.</li>
+                    <li><strong>Real-time Graph Engine:</strong> NetworkX & Plotly rendering interactive topological graphs with responsive hover inspection.</li>
+                </ul>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
 
     with col2:
-        st.subheader("🎯 2. How the AI Detects Cyber Attacks")
         st.markdown(
-            r"""
-            Detection happens across **4 continuous processing stages**:
-
-            1. **Telemetry Extraction (Encrypted-Traffic Ready):**
-               - Rather than inspecting encrypted message payloads, the engine ingests metadata:
-               - **The 5-Tuple:** Source IP, Destination IP, Source Port, Destination Port, Protocol.
-               - **Flow Dynamics:** Packet inter-arrival times (IAT), byte counts, duration, and TCP flags (SYN, ACK, RST, FIN).
-
-            2. **Spatial Graph Aggregation (The GCN):**
-               - Computers and routers are treated as **Graph Nodes**, and flows are **Directed Edges**.
-               - The GCN aggregates neighborhood connection patterns to learn host behavior.
-               - **What it catches:** Abnormal fan-out stars (port scans, subnet sweeps) and lateral host-to-host pivoting.
-
-            3. **Temporal Progression Modeling (The Transformer):**
-               - Combines spatial host vectors with flow telemetry and relative timestamps.
-               - Multi-head self-attention connects early probing whispers to later exploitation moves.
-               - **What it catches:** Machine-like scan intervals, high-speed flood bursts, and staged attack cadences.
-
-            4. **Early Kill-Chain Interception:**
-               - Evaluates threats on sliding prefix windows ($k \le 20\%$).
-               - Flags attacks in milliseconds during reconnaissance, allowing firewalls to drop traffic before exploits land.
             """
+            <div style="background:rgba(15,23,42,0.7); border:1px solid rgba(16,185,129,0.2); border-radius:12px; padding:18px; height:100%;">
+                <h4 style="color:#10b981; margin-top:0;">🎯 2. The 4-Stage Detection Pipeline</h4>
+                <ol style="color:#cbd5e1; font-size:0.88rem; line-height:1.7; padding-left:20px;">
+                    <li><strong>Encrypted Telemetry Extraction:</strong> Inspects network flow metadata (5-tuple, bytes, packets, TCP flags, IAT) without requiring payload decryption.</li>
+                    <li><strong>Spatial Structural Aggregation:</strong> Translates communicating endpoints into dynamic graph nodes to catch subnet sweeps, port scans, and lateral pivoting.</li>
+                    <li><strong>Temporal Rhythm Modeling:</strong> Transformer self-attention correlates faint reconnaissance probes with subsequent attack spikes.</li>
+                    <li><strong>Early Kill-Chain Interception:</strong> Evaluates prefixes (k &le; 20%) to trigger firewall drops within milliseconds of initial probing.</li>
+                </ol>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
 
-    st.divider()
+    st.markdown("<div style='height: 18px;'></div>", unsafe_allow_html=True)
 
-    st.subheader("⚖️ Traditional Firewalls vs. Our Hybrid Framework")
+    st.markdown("#### ⚖️ Traditional Firewalls vs. Our Hybrid AI Framework")
     comparison_data = {
-        "Capability / Metric": [
-            "Detection Basis",
+        "Capability / Dimension": [
+            "Detection Foundation",
             "Zero-Day & Polymorphic Threats",
-            "Encrypted Traffic (HTTPS/TLS)",
+            "Encrypted Traffic (TLS/HTTPS)",
             "Detection Timing",
             "Explainability (XAI)"
         ],
-        "Traditional Signature Firewalls (e.g. Snort/Suricata)": [
+        "Traditional Signature Firewalls (Snort / Suricata)": [
             "Static byte patterns and known IP blacklists",
-            "❌ Fails completely until vendor publishes a signature update",
-            "❌ Blind unless expensive SSL/TLS decryption is deployed",
+            "❌ Blind until vendor releases a patch or signature",
+            "❌ Requires costly SSL/TLS decryption proxies",
             "⚠️ Post-Mortem (alerts after exploit delivery)",
-            "❌ Simple rule match log with no context"
+            "❌ Opaque signature rule ID with zero context"
         ],
         "Our Hybrid GNN + Transformer System": [
-            "Spatial network topology + Temporal packet rhythms",
-            "✅ Detects novel anomalies via abnormal behavioral structures",
-            "✅ Fully effective using flow metadata without decrypting packets",
-            "✅ Early Prediction (flags attacks during initial 20% reconnaissance)",
-            "✅ Transformer self-attention weights highlight exact culprit packets"
+            "Spatial network graph topology + Temporal flow cadence",
+            "✅ Detects novel anomalies via behavioral deviation",
+            "✅ Operates natively on flow metadata without decryption",
+            "✅ Early Prediction (flags attacks during initial 20% prefix)",
+            "✅ Transformer self-attention highlights exact culprit packets"
         ]
     }
     st.table(pd.DataFrame(comparison_data))
 
     st.info(
-        "💡 **Key Takeaway for Analysts & Examiners:** By evaluating both **SPACE** (who talks to whom via GCN) and "
-        "**TIME** (the cadence of packets via Transformer), this system achieves a verified **99.42% accuracy** and "
-        "**0.9995 ROC-AUC** while providing full explainability for every security alert."
+        "💡 **Key Analyst Takeaway:** By unifying **SPACE** (who communicates with whom via GCN) and "
+        "**TIME** (the millisecond rhythm of flows via Transformer), the framework achieves verified "
+        "**99.42% accuracy** and **0.9995 ROC-AUC**, providing full explainability for each defensive alert."
     )
-
